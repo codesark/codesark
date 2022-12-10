@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Savinay Kumar
+          Savinay Kumar, Full Stack Developer
         </a>
       </header>
     </div>
