@@ -31,7 +31,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-multi-buildx
+          key: ${{ runner.os }}-multi-buildx-${{ steps.conf.outputs.branch }}
           restore-keys: |
             ${{ runner.os }}-multi-buildx
       -
@@ -51,9 +51,9 @@ jobs:
             codesark/codesark:${{ steps.conf.outputs.branch }}
             codesark/codesark:${{ steps.conf.outputs.branch }}-${{ steps.conf.outputs.sha_short }}
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
-      # -
-      #   name: Move Cache
-      #   run: |
-      #     rm -rf /tmp/.buildx-cache
-      #     mv /tmp/.buildx-new-cache /tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-new-cache
+      -
+        name: Move Cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-new-cache /tmp/.buildx-cache
