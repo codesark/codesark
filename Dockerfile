@@ -1,4 +1,9 @@
-FROM node:18.12-bullseye-slim as build
+FROM --platform=$BUILDPLATFORM node:18.12-alpine as build
+
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+
+RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM"
 
 WORKDIR /usr/app
 
