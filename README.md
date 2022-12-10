@@ -1,3 +1,4 @@
 # Savinay Kumar
+![example workflow](https://github.com/codesark/codesark/actions/workflows/docker-build-publish.yml/badge.svg)
 
-Please visit [savinaykumar.com](https://savinaykumar.com) for full portfolio.
+To know more about me visit [savinaykumar.com](https://savinaykumar.com).
