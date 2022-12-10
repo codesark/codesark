@@ -48,6 +48,7 @@ jobs:
           push: true
           tags: |
             codesark/codesark:latest
+            codesark/codesark:${{ steps.conf.outputs.branch }}
             codesark/codesark:${{ steps.conf.outputs.branch }}-${{ steps.conf.outputs.sha_short }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
