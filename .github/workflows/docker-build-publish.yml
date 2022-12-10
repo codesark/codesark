@@ -62,3 +62,35 @@ jobs:
       #   run: |
       #     rm -rf /tmp/.buildx-cache
       #     mv /tmp/.buildx-new-cache /tmp/.buildx-cache
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build-push]
+    steps:
+      - 
+        name: Configure SSH
+        env:
+          SSH_HOST: ${{ secrets.DEPLOYMENT_HOST }}
+          SSH_USER: ${{ secrets.DEPLOYMENT_USER }}
+          SSH_KEY: ${{ secrets.DEPLOYMENT_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/prod.key
+          chmod 600 ~/.ssh/prod.key
+          cat >>~/.ssh/config <<END
+          Host prod
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/prod.key
+            StrictHostKeyChecking no
+          END
+      - 
+        name: Deploy
+        run: |
+          ssh prod "
+            kubectl set image deployment/codesark-webapp \
+            codesark-webapp=codesark/codesark:${{ steps.conf.outputs.branch }}-${{ steps.conf.outputs.sha_short }} \
+            -n codesark
+          "
+      - 
+        name: Cleanup
+        run: rm -rf ~/.ssh
