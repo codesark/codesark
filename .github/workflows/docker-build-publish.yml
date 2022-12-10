@@ -85,10 +85,12 @@ jobs:
           END
       - 
         name: Deploy
+        env:
+          IMAGE_TAG: ${{ steps.conf.outputs.branch }}-${{ steps.conf.outputs.sha_short }}
         run: |
           ssh prod "
             kubectl set image deployment/codesark-webapp \
-            codesark-webapp=codesark/codesark:${{ steps.conf.outputs.branch }}-${{ steps.conf.outputs.sha_short }} \
+            codesark-webapp=codesark/codesark:$IMAGE_TAG \
             -n codesark
           "
       - 
