@@ -7,7 +7,7 @@ RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM"
 
 WORKDIR /usr/app
 
-COPY package*.json ./
+COPY package.json ./
 COPY package-lock.json ./
 RUN npm install
 
