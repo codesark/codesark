@@ -14,7 +14,7 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       - 
-        name: Configure
+        name: Configure Vars
         id: conf
         shell: bash
         # run: |
@@ -67,7 +67,15 @@ jobs:
     needs: [build-push]
     steps:
       - 
+        name: Configure Vars
+        id: conf
+        shell: bash
+        run: |
+          echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - 
         name: Configure SSH
+        shell: bash
         env:
           SSH_HOST: ${{ secrets.DEPLOYMENT_HOST }}
           SSH_USER: ${{ secrets.DEPLOYMENT_USER }}
