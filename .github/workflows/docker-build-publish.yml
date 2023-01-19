@@ -118,7 +118,7 @@ jobs:
         run: |
           ssh prod "
             kubectl set image deployment/codesark-webapp \
-            codesark-webapp=codesark/codesark-next:$IMAGE_TAG \
+            codesark-webapp=codesark/codesark:$IMAGE_TAG \
             -n codesark
           "
         # ssh prod "
