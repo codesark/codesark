@@ -48,30 +48,34 @@ jobs:
           username: codesark
           password: ${{ secrets.DOCKERHUB_PASS }}
 
-      - name: Build and Push - codesark-next
+      - name: Build and Push
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            codesark/codesark-next:${{ steps.conf.outputs.branch }}-${{ steps.conf.outputs.sha_short }}
-            codesark/codesark-next:${{ steps.conf.outputs.branch }}
-            codesark/codesark-next:latest
+            codesark/codesark:${{ steps.conf.outputs.branch }}-${{ steps.conf.outputs.sha_short }}
+            codesark/codesark:${{ steps.conf.outputs.branch }}
+            codesark/codesark:latest
+          # build-args: |
+          #   NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          #   NEXT_PUBLIC_SANITY_DATASET=${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+          #   NEXT_PUBLIC_SANITY_API_TOKEN=${{ secrets.NEXT_PUBLIC_SANITY_API_TOKEN }}
           # cache-from: type=local,src=/tmp/.buildx-cache
           # cache-to: type=local,mode=max,dest=/tmp/.buildx-new-cache
           cache-from: type=gha,scope=${{ github.workflow }}
           cache-to: type=gha,mode=max,scope=${{ github.workflow }}
 
-      - name: Build and Push - codesark-sanity
-        uses: docker/build-push-action@v3
-        with:
-          context: ./sanity
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            codesark/codesark-sanity:${{ steps.conf.outputs.branch }}-${{ steps.conf.outputs.sha_short }}
-            codesark/codesark-sanity:${{ steps.conf.outputs.branch }}
-            codesark/codesark-sanity:latest
+      # - name: Build and Push - codesark-sanity
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     context: ./sanity
+      #     platforms: linux/amd64,linux/arm64
+      #     push: true
+      #     tags: |
+      #       codesark/codesark-sanity:${{ steps.conf.outputs.branch }}-${{ steps.conf.outputs.sha_short }}
+      #       codesark/codesark-sanity:${{ steps.conf.outputs.branch }}
+      #       codesark/codesark-sanity:latest
       # -
       #   name: Move Cache
       #   run: |
@@ -81,49 +85,49 @@ jobs:
       branch: ${{ steps.conf.outputs.branch }}
       sha_short: ${{ steps.conf.outputs.sha_short }}
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [build-push]
-    steps:
-      - name: Configure Vars
-        id: conf
-        shell: bash
-        run: |
-          echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
-          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-      - name: Configure SSH
-        shell: bash
-        env:
-          SSH_HOST: ${{ secrets.DEPLOYMENT_HOST }}
-          SSH_USER: ${{ secrets.DEPLOYMENT_USER }}
-          SSH_KEY: ${{ secrets.DEPLOYMENT_KEY }}
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/prod.key
-          chmod 600 ~/.ssh/prod.key
-          cat >>~/.ssh/config <<END
-          Host prod
-            HostName $SSH_HOST
-            User $SSH_USER
-            IdentityFile ~/.ssh/prod.key
-            StrictHostKeyChecking no
-          END
-      # - name: Deploy
-      #   env:
-      #     IMAGE_TAG: "${{ needs.build-push.outputs.branch }}-${{ needs.build-push.outputs.sha_short }}"
-      #   run: |
-      #     ssh prod "
-      #       kubectl set image deployment/codesark-webapp-next \
-      #       codesark-webapp=codesark/codesark-next:$IMAGE_TAG \
-      #       -n codesark
-      #     "
-      #     ssh prod "
-      #       kubectl set image deployment/codesark-webapp-sanity \
-      #       codesark-webapp=codesark/codesark-sanity:$IMAGE_TAG \
-      #       -n codesark
-      #     "
-      # - name: Cleanup
-      #   run: rm -rf ~/.ssh
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: [build-push]
+  #   steps:
+  #     - name: Configure Vars
+  #       id: conf
+  #       shell: bash
+  #       run: |
+  #         echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+  #         echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+  #     - name: Configure SSH
+  #       shell: bash
+  #       env:
+  #         SSH_HOST: ${{ secrets.DEPLOYMENT_HOST }}
+  #         SSH_USER: ${{ secrets.DEPLOYMENT_USER }}
+  #         SSH_KEY: ${{ secrets.DEPLOYMENT_KEY }}
+  #       run: |
+  #         mkdir -p ~/.ssh/
+  #         echo "$SSH_KEY" > ~/.ssh/prod.key
+  #         chmod 600 ~/.ssh/prod.key
+  #         cat >>~/.ssh/config <<END
+  #         Host prod
+  #           HostName $SSH_HOST
+  #           User $SSH_USER
+  #           IdentityFile ~/.ssh/prod.key
+  #           StrictHostKeyChecking no
+  #         END
+  #     - name: Deploy
+  #       env:
+  #         IMAGE_TAG: "${{ needs.build-push.outputs.branch }}-${{ needs.build-push.outputs.sha_short }}"
+  #       run: |
+  #         ssh prod "
+  #           kubectl set image deployment/codesark-webapp-next \
+  #           codesark-webapp=codesark/codesark-next:$IMAGE_TAG \
+  #           -n codesark
+  #         "
+  #         ssh prod "
+  #           kubectl set image deployment/codesark-webapp-sanity \
+  #           codesark-webapp=codesark/codesark-sanity:$IMAGE_TAG \
+  #           -n codesark
+  #         "
+  #     - name: Cleanup
+  #       run: rm -rf ~/.ssh
 
   # # Deploy using SSH Action
   # deploy:

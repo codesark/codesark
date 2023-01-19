@@ -1,0 +1,14 @@
+version: '3'
+services:
+  codesark-next:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_SANITY_PROJECT_ID = ${NEXT_PUBLIC_SANITY_PROJECT_ID} 
+        - NEXT_PUBLIC_SANITY_DATASET = ${NEXT_PUBLIC_SANITY_DATASET} 
+        - NEXT_PUBLIC_SANITY_API_TOKEN = ${NEXT_PUBLIC_SANITY_API_TOKEN} 
+        - NEXT_PUBLIC_SANITY_BASE_URL = ${NEXT_PUBLIC_SANITY_BASE_URL}
+    env_file: .env
+    ports:
+      - 3000:3000
