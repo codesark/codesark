@@ -12,7 +12,7 @@
 
 - 🔭 I build and ship full-stack apps end to end — code, containers, CI/CD, and Kubernetes included
 - 🌱 Always tinkering with something new in the cloud-native ecosystem
-- 💬 Reach me at [codesark98@gmail.com](mailto:codesark98@gmail.com)
+- 💬 Reach me at [codesark.me@gmail.com](mailto:codesark.me@gmail.com)
 - ✨ Everything else about me lives at **[codesark.me](https://codesark.me)**
 
 ## 🛠️ Tech I Work With
@@ -30,6 +30,6 @@
 
 <div align="center">
 
-**[codesark.me](https://codesark.me)** · [codesark98@gmail.com](mailto:codesark98@gmail.com)
+**[codesark.me](https://codesark.me)** · [codesark.me@gmail.com](mailto:codesark.me@gmail.com)
 
 </div>
