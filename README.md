@@ -2,9 +2,9 @@
 
 # Hi, I'm Savinay 👋
 
-**I build backend platforms and the AI that runs on them.**
+**I build production AI systems and the platforms they run on.**
 
-Senior Software Engineer & Tech Lead · AI Platform / LLMOps · Bengaluru, India
+AI Platform Engineer & Tech Lead · Bengaluru, India
 
 [![Website](https://img.shields.io/badge/🌐_codesark.me-visit_my_site-2ea44f?style=for-the-badge)](https://codesark.me)
 
@@ -13,7 +13,7 @@ Senior Software Engineer & Tech Lead · AI Platform / LLMOps · Bengaluru, India
 ## 🚀 About Me
 
 - 🤖 I build AI platforms end to end: production RAG, self-hosted LLM inference, tool-calling agents, and automated evals wired into CI
-- ⚙️ On a backend foundation of Go, event-driven microservices, Kubernetes, and Terraform
+- ⚙️ Running on platforms I build myself: Go event-driven microservices, Kubernetes, and Terraform
 - 💬 Reach me at [codesark.me@gmail.com](mailto:codesark.me@gmail.com)
 - ✨ Everything else about me lives at **[codesark.me](https://codesark.me)**
 
@@ -32,7 +32,6 @@ I write about running LLMs in production at [codesark.me](https://codesark.me):
 
 ![RAG](https://img.shields.io/badge/RAG-7C5CE0?style=flat-square)
 ![vLLM](https://img.shields.io/badge/vLLM-2596BE?style=flat-square)
-![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square&logo=langchain&logoColor=white)
 ![MCP](https://img.shields.io/badge/MCP-E8734A?style=flat-square)
 ![RAGAS](https://img.shields.io/badge/Evals_·_RAGAS-D6519F?style=flat-square)
 ![Langfuse](https://img.shields.io/badge/Langfuse-000000?style=flat-square)
@@ -42,8 +41,8 @@ I write about running LLMs in production at [codesark.me](https://codesark.me):
 
 **Backend & Platform**
 
-![Go](https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Go](https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Kafka](https://img.shields.io/badge/Kafka-231F20?style=flat-square&logo=apachekafka&logoColor=white)
 ![NATS](https://img.shields.io/badge/NATS-27AAE1?style=flat-square&logo=natsdotio&logoColor=white)
