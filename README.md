@@ -14,7 +14,6 @@ Senior Software Engineer & Tech Lead · AI Platform / LLMOps · Bengaluru, India
 
 - 🤖 I build AI platforms end to end — production RAG, self-hosted LLM inference, tool-calling agents, and automated evals wired into CI
 - ⚙️ On a backend foundation of Go, event-driven microservices, Kubernetes, and Terraform
-- 🔭 Currently building **[ViHi](https://neosenth.com)** at Neosenth — a video-first gig platform with AI-matched professionals
 - 💬 Reach me at [codesark.me@gmail.com](mailto:codesark.me@gmail.com)
 - ✨ Everything else about me lives at **[codesark.me](https://codesark.me)**
 
